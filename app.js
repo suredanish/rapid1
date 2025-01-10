@@ -1,6 +1,6 @@
-const { PrismaClient } = require('@prisma/client');
 const crypto = require('crypto');
-var express = require('express')
+var express = require('express');
+const prisma = require('./prisma/db');
 var port = 3000
 var app = express()
 app.use(express.json())
@@ -10,7 +10,6 @@ app.get('/helloworld', (req, res) => {
 const secret = "ThereIsNoSecret"
 app.post('/signup', async (req, res) => {
     const user = req.body // {username: "danish", password: "new password"}
-    const prisma = new PrismaClient();
     const dbUser = await prisma.user.findFirst({where: {username: user.username}})
     if(dbUser){
         return res.status(409).send("User Exists")
@@ -28,7 +27,6 @@ app.post('/signup', async (req, res) => {
 })
 app.post('/signin', async(req, res) => {
     const user = req.body
-    var prisma = new PrismaClient();
     const userInDb = await prisma.user.findFirst({where:{username: user.username}})
     if(userInDb){
         if(userInDb.password == hashPass(user.password)){
