@@ -26,6 +26,18 @@ app.post('/signup', async (req, res) => {
     return res.status(201).send()
 
 })
+app.post('/signin', async(req, res) => {
+    const user = req.body
+    var prisma = new PrismaClient();
+    const userInDb = await prisma.user.findFirst({where:{username: user.username}})
+    if(userInDb){
+        if(userInDb.password == hashPass(user.password)){
+            return res.send("this is the token")
+        }
+    }
+    return res.status(401).send("Username of Password is not valid")
+    // select * from user where username = ${user.username}
+})
 app.listen(port, () => console.log("listing on " + port))
 
 function hashPass(password){
