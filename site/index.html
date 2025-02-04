@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <div class="form-container">
+        <form>
+            <h3>Sign In</h3>
+            <label>
+                Username<br>
+                <input id="signin-username" type="text">
+            </label>
+            <label>
+                Password<br>
+                <input id="signin-password" type="password">
+            </label>
+            <button id="signin-button">Sign In</button>
+        </form>
+        <div class="already-account">
+            Already have an account <a href="signin.html">Sign In</a>
+        </div>
+    </div>
+<script>
+    var button = document.querySelector('#signin-button');
+    button.addEventListener('click', async (e) => {
+        e.preventDefault()
+        // if(localStorage.getItem("AUTH_API")) {
+        //     alert('already logged in')
+        // }
+        var username = document.getElementById('signin-username').value
+        var password = document.getElementById('signin-password').value
+        console.log(username, password)
+        const requestOptions = {
+            method: "POST",
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({username: username, password}),
+            // redirect: "follow"
+        };
+        var response = await fetch('http://localhost:3000/signin', requestOptions);
+        // response give data as stream
+        var data = await response.json();
+        // does not persist after browser close
+        document.cookie = `AUTH_API=${data.token}`
+        // persists after browser close
+        localStorage.setItem("AUTH_API", data.token);
+        console.log(data)
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+html {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+* {
+    /*include border as part of origin size*/
+    box-sizing: border-box;
+}
+.form-container{
+    width: 300px;
+    margin-inline: auto;
+    margin-top: 50px;
+}
+.form-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    color: palevioletred;
+}
+
+.form-container label {
+    width: 100%;
+}
+.form-container input {
+    all: unset;
+    box-sizing: border-box;
+    border: 2px solid palevioletred;
+    width: 100%;
+    height: 32px;
+    border-radius: 6px;
+    padding-left: 5px;
+}
+.form-container label:hover, .form-container label:focus, .form-container button:focus, .form-container button:hover {
+    border-color: #e42765;
+    color: #df4376;
+}
+.form-container button{
+    cursor: pointer;
+}
+.form-container button:hover{
+    /*transform: scale(1.01);*/
+}
+.form-container button {
+    border: 2px solid palevioletred;
+    width: 100%;
+    height: 30px;
+    border-radius: 6px;
+    background-color: transparent;
+    color: palevioletred;
+    font-weight: 700;
+    margin-top: 10px;
+}
+.already-account {
+    margin-top: 20px;
+    color: palevioletred;
+}
+.already-account a {
+    color: #df4376;
+}
+.already-account a:hover {
+    color: #df4376;
+    cursor: pointer;
+    transform: scale(1.01);
+}
